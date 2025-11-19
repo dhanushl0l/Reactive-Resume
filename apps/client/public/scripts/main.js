@@ -515,3 +515,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error fetching courses:', error);
   }
 });
+
+(function () {
+  const newFavicon = '/assets/images/logo/favicon.ico';
+
+  // Remove all existing favicons
+  document.querySelectorAll('link[rel*="icon"]').forEach(link => link.remove());
+
+  // Create new favicon tag
+  const link = document.createElement('link');
+  link.rel = 'icon';
+  link.href = newFavicon;
+  document.head.appendChild(link);
+})();
