@@ -60,7 +60,12 @@ jobs:
       - name: Save digest artifact
         run: |
           mkdir -p /tmp/digests
-          echo "${{ steps.build.outputs.digest }}" >> /tmp/digests/digest-${{ matrix.platform }}
+          platform="${{ matrix.platform }}"
+
+          # Replace / with -
+          safe_platform="${platform//\//-}"
+
+          echo "${{ steps.build.outputs.digest }}" >> "/tmp/digests/digest-${safe_platform}"
 
       - name: Upload digest artifacts
         uses: actions/upload-artifact@v4
